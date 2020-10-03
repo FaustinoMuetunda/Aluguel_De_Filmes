@@ -45,6 +45,15 @@ public class LocacaoService {
 		System.out.println(locacao.getDataLocacao());
 		System.out.println(locacao.getDataRetorno());
 		
+		//Verificar se os atributos estao conforme o esperado
+		System.out.println();
+		
+		System.out.println(locacao.getValor() ==5);
+		System.out.println(DataUtils.isMesmaData(locacao.getDataLocacao(), new Date()));
+		System.out.println(DataUtils.isMesmaData(locacao.getDataRetorno(), DataUtils.obterDataComDiferencaDias(1)));
+		
+		
+		
 		
 		
 	}
