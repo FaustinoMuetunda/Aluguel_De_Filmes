@@ -34,7 +34,7 @@ public class LocacaoServiceTeste {
 		System.out.println();
 		
 		
-		Assert.assertTrue(locacao.getValor() ==5.0);
+		Assert.assertEquals( 5.0, locacao.getValor(), 0.01);
 		Assert.assertTrue(DataUtils.isMesmaData(locacao.getDataLocacao(), new Date()));
 		Assert.assertTrue(DataUtils.isMesmaData(locacao.getDataRetorno(), DataUtils.obterDataComDiferencaDias(1)));
 		
