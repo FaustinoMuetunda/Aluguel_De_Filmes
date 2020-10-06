@@ -1,15 +1,20 @@
 package br.ce.wcaquino.servicos;
 
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Date;
 
-import org.junit.Assert;
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 import br.ce.wcaquino.entidades.Filme;
 import br.ce.wcaquino.entidades.Locacao;
 import br.ce.wcaquino.entidades.Usuario;
-import br.ce.wcaquino.servicos.LocacaoService;
 import br.ce.wcaquino.utils.DataUtils;
 
 public class LocacaoServiceTeste {
@@ -33,10 +38,12 @@ public class LocacaoServiceTeste {
 		//Verificar se os atributos estao conforme o esperado
 		System.out.println();
 		
-		
-		Assert.assertEquals( 5.0, locacao.getValor(), 0.01);
-		Assert.assertTrue(DataUtils.isMesmaData(locacao.getDataLocacao(), new Date()));
-		Assert.assertTrue(DataUtils.isMesmaData(locacao.getDataRetorno(), DataUtils.obterDataComDiferencaDias(1)));
+		//Para a leitura ter ficado facilitada, fiz o import import org.hamcrest.CoreMatchers;
+	
+		assertThat( locacao.getValor(), is(equalTo(5.0)));
+		assertThat( locacao.getValor(), is(not(6.0)));
+		assertThat(DataUtils.isMesmaData(locacao.getDataLocacao(), new Date()), is(true));
+		assertThat(DataUtils.isMesmaData(locacao.getDataRetorno(), DataUtils.obterDataComDiferencaDias(1)), is(true));
 		
 		
 		
