@@ -52,12 +52,6 @@ public class LocacaoServiceTeste {
 		//Accao
 		Locacao locacao=service.alugarFilme(usuario, filme);
 		
-		//Verificacao
-		
-		
-		//Verificar se os atributos estao conforme o esperado
-		
-		
 		//Para a leitura ter ficado facilitada, fiz o import import org.hamcrest.CoreMatchers;
 		//imports 
 	
