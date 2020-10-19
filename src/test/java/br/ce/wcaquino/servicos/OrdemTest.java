@@ -1,27 +1,24 @@
 package br.ce.wcaquino.servicos;
 
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
+@FixMethodOrder(MethodSorters.DEFAULT)
 public class OrdemTest {
-	public static int cont=0;
+	public static int cont = 0;
+
+	@Test
 
 	public void inicia() {
-		cont=1;
+		cont = 1;
 	}
 
-	
+	@Test
+
 	public void verificacao() {
 		Assert.assertEquals(1, cont);
-	}
-	
-	//O Junit não garante a ordem de ocorrencia dos testes. 
-	//Para o caso, convem criar um teste geral que implemente esta ordem
-	@Test
-	public void testGeral() {
-		inicia();
-		verificacao();
-
 	}
 
 }
