@@ -1,6 +1,6 @@
-package br.ce.wcaquino.servicos;
+package servicos;
 
-import br.ce.wcaquino.exceptions.NaoPodeDividirPorZeroException;
+import exceptions.NaoPodeDividirPorZeroException;
 
 public class Calculadora {
 

@@ -1,4 +1,4 @@
-package br.ce.wcaquino.exceptions;
+package exceptions;
 
 public class NaoPodeDividirPorZeroException extends Exception {
 

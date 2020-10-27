@@ -1,12 +1,13 @@
-package br.ce.wcaquino.servicos;
+package servicoss;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.ce.wcaquino.exceptions.NaoPodeDividirPorZeroException;
+import exceptions.NaoPodeDividirPorZeroException;
+import servicos.Calculadora;
 
-public class CasculadoraTest {
+public class CalculadoraTest {
 	private Calculadora calc;
 
 	@Before

@@ -1,11 +1,13 @@
-package br.ce.wcaquino.servicos;
+package servicoss;
 
-import static br.ce.wcaquino.utils.DataUtils.isMesmaData;
+import static matcherers.MatchersProprios.caiEm;
+import static matcherers.MatchersProprios.caiNumaSegunda;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static utils.DataUtils.isMesmaData;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -24,12 +26,15 @@ import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 import org.junit.rules.ExpectedException;
 
-import br.ce.wcaquino.entidades.Filme;
-import br.ce.wcaquino.entidades.Locacao;
-import br.ce.wcaquino.entidades.Usuario;
-import br.ce.wcaquino.exceptions.FilmeSemEstoqueExceptions;
-import br.ce.wcaquino.exceptions.LocadoraException;
-import br.ce.wcaquino.utils.DataUtils;
+import entidades.Filme;
+import entidades.Locacao;
+import entidades.Usuario;
+import exceptions.FilmeSemEstoqueExceptions;
+import exceptions.LocadoraException;
+import matcherers.DiasSemanaMatcher;
+import matcherers.MatchersProprios;
+import servicos.LocacaoService;
+import utils.DataUtils;
 
 public class LocacaoServiceTeste {
 	private LocacaoService service;
@@ -124,8 +129,8 @@ public class LocacaoServiceTeste {
 		Locacao retorno = service.alugarFilme(usuario, filmes);
 
 		// verificacao
-		boolean ehSegunada = DataUtils.verificarDiaSemana(retorno.getDataRetorno(), Calendar.MONDAY);
-		Assert.assertTrue(ehSegunada);
+		//assertThat(retorno.getDataRetorno(), caiEm(Calendar.MONDAY));
+		assertThat(retorno.getDataRetorno(), caiNumaSegunda());
 
 	}
 

@@ -1,8 +1,8 @@
-package br.ce.wcaquino.servicos;
+package servicoss;
 
 import org.junit.Test;
 
-import br.ce.wcaquino.entidades.Usuario;
+import entidades.Usuario;
 
 import org.junit.Assert;
 

@@ -1,6 +1,6 @@
-package br.ce.wcaquino.servicos;
+package servicos;
 
-import static br.ce.wcaquino.utils.DataUtils.adicionarDias;
+import static utils.DataUtils.adicionarDias;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -9,12 +9,12 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.ce.wcaquino.entidades.Filme;
-import br.ce.wcaquino.entidades.Locacao;
-import br.ce.wcaquino.entidades.Usuario;
-import br.ce.wcaquino.exceptions.FilmeSemEstoqueExceptions;
-import br.ce.wcaquino.exceptions.LocadoraException;
-import br.ce.wcaquino.utils.DataUtils;
+import entidades.Filme;
+import entidades.Locacao;
+import entidades.Usuario;
+import exceptions.FilmeSemEstoqueExceptions;
+import exceptions.LocadoraException;
+import utils.DataUtils;
 
 public class LocacaoService {
 

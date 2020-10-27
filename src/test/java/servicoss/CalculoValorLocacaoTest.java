@@ -1,4 +1,4 @@
-package br.ce.wcaquino.servicos;
+package servicoss;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -15,11 +15,12 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import br.ce.wcaquino.entidades.Filme;
-import br.ce.wcaquino.entidades.Locacao;
-import br.ce.wcaquino.entidades.Usuario;
-import br.ce.wcaquino.exceptions.FilmeSemEstoqueExceptions;
-import br.ce.wcaquino.exceptions.LocadoraException;
+import entidades.Filme;
+import entidades.Locacao;
+import entidades.Usuario;
+import exceptions.FilmeSemEstoqueExceptions;
+import exceptions.LocadoraException;
+import servicos.LocacaoService;
 
 @RunWith(Parameterized.class)
 public class CalculoValorLocacaoTest {
@@ -32,6 +33,7 @@ public class CalculoValorLocacaoTest {
 	@Parameter(value=2)
 	public String cenario;
 
+	
 	@Before
 	public void setup() {
 		service = new LocacaoService();
@@ -55,8 +57,7 @@ public class CalculoValorLocacaoTest {
 			{ Arrays.asList(filme1, filme2, filme3), 11.0, "3 Filmes: 25 %"},
 			{ Arrays.asList(filme1, filme2, filme3,filme4), 13.0 , "4 Filmes: 50 %"},
 			{ Arrays.asList(filme1, filme2, filme3,filme4,filme5), 14.0, "5 Filmes: 75 %" },
-			{ Arrays.asList(filme1, filme2, filme3,filme4,filme5,filme5), 14.0 , "6 Filmes: 100 %"}
-		});
+			{ Arrays.asList(filme1, filme2, filme3, filme4, filme5, filme5), 14.0, "6 Filmes: 100 %" } });
 
 	}
 
