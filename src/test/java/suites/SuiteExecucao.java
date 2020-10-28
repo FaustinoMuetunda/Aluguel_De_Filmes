@@ -9,7 +9,7 @@ import servicoss.CalculadoraTest;
 import servicoss.CalculoValorLocacaoTest;
 import servicoss.LocacaoServiceTeste;
 
-@RunWith(Suite.class)
+//@RunWith(Suite.class)
 
 @SuiteClasses({
 	CalculadoraTest.class,
