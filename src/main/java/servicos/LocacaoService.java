@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import daos.LocacaoDAO;
 import entidades.Filme;
 import entidades.Locacao;
 import entidades.Usuario;
@@ -17,6 +18,7 @@ import exceptions.LocadoraException;
 import utils.DataUtils;
 
 public class LocacaoService {
+	private LocacaoDAO dao;
 
 	public Locacao alugarFilme(Usuario usuario, List<Filme> filmes)
 			throws FilmeSemEstoqueExceptions, LocadoraException {
@@ -69,9 +71,13 @@ public class LocacaoService {
 		locacao.setDataRetorno(dataEntrega);
 
 		// Salvando a locacao...
-		// TODO adicionar método para salvar
+		dao.salvar(locacao);
 
 		return locacao;
+	}
+	public void setLocacaoDao(LocacaoDAO dao) {
+		this.dao=dao;
+		
 	}
 
 }

@@ -18,6 +18,8 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 import builders.FilmeBuilder;
+import daos.LocacaoDAO;
+import daos.LocacaoFake;
 import entidades.Filme;
 import entidades.Locacao;
 import entidades.Usuario;
@@ -40,6 +42,8 @@ public class CalculoValorLocacaoTest {
 	@Before
 	public void setup() {
 		service = new LocacaoService();
+		LocacaoDAO dao=new LocacaoFake();
+		service.setLocacaoDao(dao);
 	}
 
 	// Criar a colecao que sera testada

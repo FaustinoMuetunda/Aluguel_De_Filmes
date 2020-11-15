@@ -30,6 +30,8 @@ import org.junit.rules.ExpectedException;
 import buildermaster.BuilderMaster;
 import builders.FilmeBuilder;
 import builders.UsuarioBuilder;
+import daos.LocacaoDAO;
+import daos.LocacaoFake;
 import entidades.Filme;
 import entidades.Locacao;
 import entidades.Usuario;
@@ -46,6 +48,8 @@ public class LocacaoServiceTeste {
 	@Before
 	public void setup() {
 		service = new LocacaoService();
+		LocacaoDAO dao=new LocacaoFake();
+		service.setLocacaoDao(dao);
 	}
 
 	@Rule
