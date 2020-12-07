@@ -26,6 +26,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 import org.junit.rules.ExpectedException;
+import org.mockito.Mockito;
 
 import buildermaster.BuilderMaster;
 import builders.FilmeBuilder;
@@ -40,16 +41,21 @@ import exceptions.LocadoraException;
 import matcherers.DiasSemanaMatcher;
 import matcherers.MatchersProprios;
 import servicos.LocacaoService;
+import servicos.SPCService;
 import utils.DataUtils;
 
 public class LocacaoServiceTeste {
 	private LocacaoService service;
+	private SPCService spc;
+	private LocacaoDAO dao;
 
 	@Before
 	public void setup() {
 		service = new LocacaoService();
-		LocacaoDAO dao=new LocacaoFake();
+		dao = Mockito.mock(LocacaoDAO.class);
 		service.setLocacaoDao(dao);
+		spc = Mockito.mock(SPCService.class);
+		service.setSPCService(spc);
 	}
 
 	@Rule
@@ -89,7 +95,11 @@ public class LocacaoServiceTeste {
 		// Cenario
 
 		Usuario usuario = umUsuario().agora();
-		List<Filme> filmes =  Arrays.asList(FilmeBuilder.umFilmeSemEstoque().agora()); //o builder facilita na leitura do codigo. Que apenas pela sua criação, basta ver para saber que é um filme sem stock
+		List<Filme> filmes = Arrays.asList(FilmeBuilder.umFilmeSemEstoque().agora()); // o builder facilita na leitura
+																						// do codigo. Que apenas pela
+																						// sua criação, basta ver para
+																						// saber que é um filme sem
+																						// stock
 
 		// Accao
 		service.alugarFilme(usuario, filmes);
@@ -101,7 +111,7 @@ public class LocacaoServiceTeste {
 	public void naoDeveAlugarFilmeSemUsuario() throws FilmeSemEstoqueExceptions {
 
 		// cenario
-		List<Filme> filmes =  Arrays.asList(FilmeBuilder.umFilme().agora());
+		List<Filme> filmes = Arrays.asList(FilmeBuilder.umFilme().agora());
 
 		// accao
 		try {
@@ -131,21 +141,34 @@ public class LocacaoServiceTeste {
 		Assume.assumeTrue(DataUtils.verificarDiaSemana(new Date(), Calendar.SATURDAY));
 		// cenario
 		Usuario usuario = umUsuario().agora();
-		List<Filme> filmes =  Arrays.asList(FilmeBuilder.umFilme().agora());
+		
+		List<Filme> filmes = Arrays.asList(FilmeBuilder.umFilme().agora());
 
 		// accao
 		Locacao retorno = service.alugarFilme(usuario, filmes);
 
 		// verificacao
-		//assertThat(retorno.getDataRetorno(), caiEm(Calendar.MONDAY));
+		// assertThat(retorno.getDataRetorno(), caiEm(Calendar.MONDAY));
 		assertThat(retorno.getDataRetorno(), caiNumaSegunda());
 
 	}
-	
-	public static void main(String[] args) {
+
+	@Test
+	public void naoDeveAlugarFilmesParaNegativadoSPC() throws FilmeSemEstoqueExceptions, LocadoraException {
+		// cenario
+		Usuario usuario = umUsuario().agora();
+		Usuario usuario2= umUsuario().comNome("Usuario2").agora();
+		List<Filme> filmes = Arrays.asList(FilmeBuilder.umFilme().agora());
 		
-		new BuilderMaster().gerarCodigoClasse(Locacao.class);
+		Mockito.when(spc.possuiNegativacao(usuario)).thenReturn(true);
 		
+		exception.expect(LocadoraException.class);
+		exception.expectMessage("Usuario Negativado");
+		
+		// acao
+		service.alugarFilme(usuario, filmes);
+		
+		// verificacao
 	}
 
 }

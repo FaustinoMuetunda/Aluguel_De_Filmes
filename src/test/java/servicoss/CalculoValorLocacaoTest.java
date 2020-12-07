@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
+import org.mockito.Mockito;
 
 import builders.FilmeBuilder;
 import daos.LocacaoDAO;
@@ -26,6 +27,7 @@ import entidades.Usuario;
 import exceptions.FilmeSemEstoqueExceptions;
 import exceptions.LocadoraException;
 import servicos.LocacaoService;
+import servicos.SPCService;
 
 @RunWith(Parameterized.class)
 public class CalculoValorLocacaoTest {
@@ -42,9 +44,11 @@ public class CalculoValorLocacaoTest {
 	@Before
 	public void setup() {
 		service = new LocacaoService();
-		LocacaoDAO dao=new LocacaoFake();
+		LocacaoDAO dao=Mockito.mock(LocacaoDAO.class);
 		service.setLocacaoDao(dao);
-	}
+		SPCService spc = Mockito.mock(SPCService.class);
+		service.setSPCService(spc);
+	} 
 
 	// Criar a colecao que sera testada
 	private static Filme filme1 =  umFilme().agora();
