@@ -20,6 +20,7 @@ import utils.DataUtils;
 public class LocacaoService {
 	private LocacaoDAO dao;
 	private SPCService spcService;
+	private EmailService emaiservices;
 
 	public Locacao alugarFilme(Usuario usuario, List<Filme> filmes)
 			throws FilmeSemEstoqueExceptions, LocadoraException {
@@ -37,6 +38,7 @@ public class LocacaoService {
 
 			}
 
+		
 		}
 		
 		if(spcService.possuiNegativacao(usuario)) {
@@ -81,6 +83,17 @@ public class LocacaoService {
 
 		return locacao;
 	}
+	//o metodo vai notificar atrasos para clientes com pagamentos
+	public void notificarAtrasos() {
+		List<Locacao>locacoes=dao.obterLocacoesPendentes();
+		for(Locacao locacao: locacoes) {
+			emaiservices.notificarAtraso(locacao.getUsuario());
+			
+		}
+		
+	}
+	
+	
 	public void setLocacaoDao(LocacaoDAO dao) {
 		this.dao=dao;
 		
@@ -88,6 +101,11 @@ public class LocacaoService {
 	
 	public void setSPCService(SPCService spc) {
 		spcService=spc;
+	}
+	
+	public void setEmailService(EmailService email) {
+		
+		emaiservices=email;
 	}
 
 }
